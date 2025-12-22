@@ -15,8 +15,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from wish_gen import *
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 JSON_PATH = BASE_DIR / "ppl.json"
@@ -34,8 +35,8 @@ if(sptfy):
 
 
     #2. create Spotify Playlist
-    SPOTIPY_CLIENT_ID="02a5a4ad7c0c4edf9547f46a82c23b12"
-    SPOTIPY_CLIENT_SECRET="cca4cfdb710648c1b6e0d98e657e3484"
+    SPOTIPY_CLIENT_ID=os.getenv("SPOTIPY_CLIENT_ID")
+    SPOTIPY_CLIENT_SECRET=os.getenv("SPOTIPY_CLIENT_SECRET")
     SPOTIPY_REDIRECT_URI="https://example.com/"
 
 
