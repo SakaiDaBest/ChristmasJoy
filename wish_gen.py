@@ -5,30 +5,17 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langgraph.prebuilt import create_react_agent
 
 
-# --------------------------------------------------
-# ENV
-# --------------------------------------------------
 load_dotenv()
 
-
-# --------------------------------------------------
-# STRUCTURED OUTPUT SCHEMA
-# --------------------------------------------------
 class ChristmasWish(BaseModel):
     message: str
     blessing: str
 
 
-# --------------------------------------------------
-# LLM + OUTPUT PARSER
-# --------------------------------------------------
 llm = ChatGroq(model="llama-3.3-70b-versatile")
 parser = PydanticOutputParser(pydantic_object=ChristmasWish)
 
 
-# --------------------------------------------------
-# SYSTEM PROMPT (as string for LangGraph)
-# --------------------------------------------------
 system_prompt = f"""
 You are a friendly assistant that creates warm Christmas wishes.
 
@@ -41,9 +28,6 @@ Do NOT add explanations or extra text.
 """
 
 
-# --------------------------------------------------
-# CREATE AGENT (LangGraph) - NO TOOLS
-# --------------------------------------------------
 agent = create_react_agent(
     model=llm,
     tools=[],  # Empty tools list
@@ -51,9 +35,6 @@ agent = create_react_agent(
 )
 
 
-# --------------------------------------------------
-# RUN
-# --------------------------------------------------
 def wish(type,name):
     print("🎄 Generating Christmas Wish...\n")
 
